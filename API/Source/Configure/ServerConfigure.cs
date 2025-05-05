@@ -1,7 +1,7 @@
 ﻿using System.Net;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 
-namespace Me.UserHub;
+namespace TaskTrain.UserHub;
 
 internal static class ServerConfigure
 {

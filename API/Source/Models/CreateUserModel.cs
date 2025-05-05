@@ -1,7 +1,8 @@
-﻿namespace Me.UserHub;
+﻿namespace TaskTrain.UserHub;
 
-internal sealed class CreateUserModel
+public sealed class CreateUserModel
 {
     public string Login { get; set; }
     public string Password { get; set; }
+    public string RepeatPassword { get; set; }
 }

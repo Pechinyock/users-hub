@@ -1,6 +1,6 @@
-﻿namespace Me.UserHub;
+﻿namespace TaskTrain.UserHub;
 
 internal interface IUserRepository
 {
-    Task Create(CreateUserModel user);
+    Task CreateAsync(CreateUserModel user);
 }

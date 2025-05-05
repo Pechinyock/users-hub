@@ -1,11 +1,16 @@
-namespace Me.UserHub;
+namespace TaskTrain.UserHub;
 
 internal static class EntryPoint
 {
     internal static void Main(string[] args)
     {
         var builder = WebApplication.CreateSlimBuilder();
-        /* by defalul loads every single env var in to it */
+
+        /* [Note]
+         * By default adds all environment variables
+         * Clearing everything with Clear()
+         * and adding the only ones we needed
+         */
         builder.Configuration.Sources.Clear();
         builder.Configuration.LoadEnvironmentVariables();
         builder.Configuration.LoadAppsettingsJson();
@@ -13,15 +18,13 @@ internal static class EntryPoint
         builder.WebHost.ConfigureServer();
 
         builder.Services.ConfigureJsonSerializer();
-        builder.Services.ConfigureCORS();
-
         builder.Services.AddGrpc();
         builder.Services.AddUserRepository(builder.Configuration);
+        builder.Services.AddUserHubService();
 
         var app = builder.Build();
-        
-        app.UseCors("AllowAll");
-        //app.MapGrpcService<NewService>();
+
+        app.MapGrpcService<UsersHubGRPC>();
 
         app.Run();
     }

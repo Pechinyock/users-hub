@@ -1,7 +1,7 @@
 ﻿using Npgsql;
 using Microsoft.Extensions.Options;
 
-namespace Me.UserHub;
+namespace TaskTrain.UserHub;
 
 internal sealed class UserRepositoryOptions 
 {
@@ -19,7 +19,7 @@ internal sealed class UserRepository : IUserRepository
         _connectionString = _configuration.ConnectionString;
     }
 
-    public Task Create(CreateUserModel user)
+    public Task CreateAsync(CreateUserModel user)
     {
         var connection = new NpgsqlConnection(_connectionString);
         connection.Open();

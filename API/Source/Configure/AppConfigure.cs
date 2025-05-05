@@ -1,4 +1,4 @@
-﻿namespace Me.UserHub;
+﻿namespace TaskTrain.UserHub;
 
 internal static class AppConfigure
 {
