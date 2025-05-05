@@ -1,0 +1,29 @@
+﻿using Npgsql;
+using Microsoft.Extensions.Options;
+
+namespace Me.UserHub;
+
+internal sealed class UserRepositoryOptions 
+{
+    public string ConnectionString { get; set; }
+}
+
+internal sealed class UserRepository : IUserRepository
+{
+    private readonly string _connectionString;
+    private readonly UserRepositoryOptions _configuration;
+
+    public UserRepository(IOptions<UserRepositoryOptions> options)
+    {
+        _configuration = options?.Value;
+        _connectionString = _configuration.ConnectionString;
+    }
+
+    public Task Create(CreateUserModel user)
+    {
+        var connection = new NpgsqlConnection(_connectionString);
+        connection.Open();
+        connection.Close();
+        return Task.CompletedTask;
+    }
+}

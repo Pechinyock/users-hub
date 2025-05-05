@@ -1,0 +1,91 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<TargetFramework>net9.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<RootNamespace>Me</RootNamespace>
+		<InvariantGlobalization>true</InvariantGlobalization>
+		<PublishAot>true</PublishAot>
+		<IsAotCompatible>true</IsAotCompatible>
+		<Configurations>Debug;Release;Test;Staging</Configurations>
+	</PropertyGroup>
+
+	<!-- Настройки, которые зависят от конфигурации -->
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<NoWarn>1701;1702</NoWarn>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Test|AnyCPU'">
+		<NoWarn>1701;1702</NoWarn>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Test|AnyCPU'">
+		<NoWarn>1701;1702</NoWarn>
+		<Optemize>true</Optemize>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Staging|AnyCPU'">
+		<NoWarn>1701;1702</NoWarn>
+		<!-- Отключение генерации pdb файлов -->
+		<DebugSymbols>false</DebugSymbols>
+		<DebugType>none</DebugType>
+		<Optemize>true</Optemize>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<NoWarn>1701;1702</NoWarn>
+		<!-- Отключение генерации pdb файлов -->
+		<DebugSymbols>false</DebugSymbols>
+		<DebugType>none</DebugType>
+		<Optemize>true</Optemize>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Staging|AnyCPU'">
+		<NoWarn>1701;1702</NoWarn>
+		<DebugSymbols>false</DebugSymbols>
+		<DebugType>none</DebugType>
+		<Optemize>true</Optemize>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Remove="Directory.Build.props" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Content Include="../.editorconfig" />
+		<PackageReference Include="Npgsql" Version="9.0.3" />
+		<PackageReference Include="Dapper.AOT" Version="1.0.48" />
+		<PackageReference Include="Grpc.AspNetCore" Version="2.70.0" />
+
+		<!-- Убираем копирвание appsetting файлов (включено по умолчаню шаблоном) -->
+		<Content Update="Config/appsettings*.json">
+			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
+			<CopyToPublishDirectory>Never</CopyToPublishDirectory>
+		</Content>
+
+		<!-- При билде в Debug конфигурации копируем appsettings.Development.json -->
+		<Content Update="Config/appsettings.Development.json" Condition="'$(Configuration)' == 'Debug'">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+		</Content>
+
+		<!-- При билде в Test конфигурации копирует appsettings.StagingDocker.json -->
+		<Content Update="Config/appsettings.Test.json" Condition="'$(Configuration)' == 'Test'">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+		</Content>
+
+		<!-- При билде в Staging конфигурации копируем appsettings.Staging.json -->
+		<Content Update="Config/appsettings.Staging.json" Condition="'$(Configuration)' == 'Staging'">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+		</Content>
+
+		<!-- При билде в Release конфигурации копируем appsettings.Production.json -->
+		<Content Update="Config/appsettings.Production.json" Condition="'$(Configuration)' == 'Release'">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+		</Content>
+
+	</ItemGroup>
+
+</Project>
