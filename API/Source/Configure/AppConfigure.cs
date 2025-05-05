@@ -13,6 +13,11 @@ internal static class AppConfigure
     {
         var environmentName = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
 
+        if (String.IsNullOrWhiteSpace(environmentName)) 
+        {
+            environmentName = "Production";
+        }
+
         configBuilder.AddJsonFile($"Config/appsettings.{environmentName}.json");
 
         return configBuilder;
