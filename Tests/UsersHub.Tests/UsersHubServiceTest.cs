@@ -1,15 +1,15 @@
 ﻿using Moq;
+using Grpc.Core;
+using Grpc.Core.Testing;
 using TaskTrain.UserHub;
 using TaskTrain.Contracts;
-using Grpc.Core.Testing;
-using Grpc.Core;
 
 namespace UsersHub.Tests;
 
 public class UsersHubServiceTest
 {
     [Fact]
-    public async void ExampleGRPCUnitTest()
+    public async Task ExampleGRPCUnitTest()
     {
         var mockUserHubSvc = new Mock<IUserHubService>();
 
