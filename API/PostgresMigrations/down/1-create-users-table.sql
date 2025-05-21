@@ -1,0 +1,1 @@
+﻿select "It is minimal available version. If you really want to go back use drop database direcly into database instead!"

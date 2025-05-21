@@ -56,6 +56,8 @@
 		<PackageReference Include="Npgsql" Version="9.0.3" />
 		<PackageReference Include="Dapper.AOT" Version="1.0.48" />
 		<PackageReference Include="Grpc.AspNetCore" Version="2.70.0" />
+		<PackageReference Include="TaskTrain.Core" Version="1.0.0" />
+		<PackageReference Include="TaskTrain.PostgreStorage" Version="1.0.0" />
 		<PackageReference Include="TaskTrain.UsersHub.Server" Version="1.0.0" />
 
 		<!-- Убираем копирвание appsetting файлов (включено по умолчаню шаблоном) -->
@@ -88,6 +90,16 @@
 			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
 		</Content>
 
+	</ItemGroup>
+
+	<!--Copy migrations into output-->
+	<ItemGroup>
+		<None Update="PostgresMigrations\down\*.sql">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="PostgresMigrations\up\*.sql">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
 	</ItemGroup>
 
 </Project>

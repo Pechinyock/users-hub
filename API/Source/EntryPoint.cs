@@ -26,6 +26,8 @@ internal static class EntryPoint
 
         app.MapGrpcService<UsersHubGRPC>();
 
+        StorageInitializer.Initialize();
+
         app.Run();
     }
 }
