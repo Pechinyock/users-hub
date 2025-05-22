@@ -14,9 +14,6 @@
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
 		<NoWarn>1701;1702</NoWarn>
 	</PropertyGroup>
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Test|AnyCPU'">
-		<NoWarn>1701;1702</NoWarn>
-	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Test|AnyCPU'">
 		<NoWarn>1701;1702</NoWarn>
@@ -34,13 +31,6 @@
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
 		<NoWarn>1701;1702</NoWarn>
 		<!-- Отключение генерации pdb файлов -->
-		<DebugSymbols>false</DebugSymbols>
-		<DebugType>none</DebugType>
-		<Optemize>true</Optemize>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Staging|AnyCPU'">
-		<NoWarn>1701;1702</NoWarn>
 		<DebugSymbols>false</DebugSymbols>
 		<DebugType>none</DebugType>
 		<Optemize>true</Optemize>
@@ -92,7 +82,7 @@
 
 	</ItemGroup>
 
-	<!--Copy migrations into output-->
+	<!--Copy migrations into output -->
 	<ItemGroup>
 		<None Update="PostgresMigrations\down\*.sql">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

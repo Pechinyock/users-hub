@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.Options;
-
-using TaskTrain.Core;
+﻿using TaskTrain.Core;
 using TaskTrain.Core.Postgres;
 
 namespace TaskTrain.UserHub;
