@@ -1,8 +1,7 @@
-﻿using TaskTrain.Contracts;
+﻿using TaskTrain.Core;
 
 namespace TaskTrain.UserHub;
 
-internal interface IUserRepository
+internal interface IUserRepository : IRepository<User, Guid>
 {
-    Task CreateAsync(CreateUserRequest user);
 }

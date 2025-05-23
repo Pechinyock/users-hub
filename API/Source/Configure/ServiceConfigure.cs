@@ -11,10 +11,4 @@ internal static class ServiceConfigure
         });
         return services;
     }
-
-    internal static IServiceCollection AddUserHubService(this IServiceCollection services)
-    {
-        services.AddScoped<IUserHubService, UserHubService>();
-        return services;
-    }
 }

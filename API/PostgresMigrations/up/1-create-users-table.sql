@@ -2,7 +2,7 @@
 
 create table "user-hub"."users"
 (
-   id serial primary key,
-   login     varchar(20),
-   password  varchar(20)
+   id            uuid               primary key,
+   login         varchar(20) unique not null,
+   password text                    not null
 );

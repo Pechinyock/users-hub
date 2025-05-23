@@ -1,8 +1,10 @@
-﻿namespace TaskTrain.UserHub;
+﻿using TaskTrain.Core;
 
-internal sealed class User
+namespace TaskTrain.UserHub;
+
+internal sealed class User : IEntity<Guid>
 {
     public required Guid Id { get; set; }
     public required string Login { get; set; }
-    public required string PasswordHash { get; set; }
+    public required string Password { get; set; }
 }

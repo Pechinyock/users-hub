@@ -20,7 +20,6 @@ internal static class EntryPoint
         builder.Services.ConfigureJsonSerializer();
         builder.Services.AddGrpc();
         builder.Services.AddUserRepository(builder.Configuration);
-        builder.Services.AddUserHubService();
 
         var app = builder.Build();
 
