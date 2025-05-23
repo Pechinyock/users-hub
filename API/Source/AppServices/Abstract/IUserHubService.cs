@@ -1,6 +1,8 @@
-﻿namespace TaskTrain.UserHub;
+﻿using TaskTrain.Contracts;
+
+namespace TaskTrain.UserHub;
 
 public interface IUserHubService
 {
-    public Task CreateUserAsync(CreateUserModel createUserModel);
+    public Task CreateUserAsync(CreateUserRequest createUserModel);
 }

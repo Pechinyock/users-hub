@@ -1,9 +1,9 @@
-﻿using TaskTrain.UserHub;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
+using TaskTrain.Contracts;
 
 [JsonSerializable(typeof(bool))]
 [JsonSerializable(typeof(int))]
-[JsonSerializable(typeof(CreateUserModel))]
+[JsonSerializable(typeof(CreateUserRequest))]
 internal partial class AppJsonSerializerContext : JsonSerializerContext
 {
 }

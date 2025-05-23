@@ -14,9 +14,8 @@ internal sealed class UsersHubGRPC : Contracts.UserHub.UserHubBase
 
     public override async Task<CreateUserResponse> Create(CreateUserRequest request, ServerCallContext context)
     {
-        var model = request.ToModel();
 
-        await _userHubService.CreateUserAsync(model);
+        await _userHubService.CreateUserAsync(request);
         var result = Task.FromResult(new CreateUserResponse()
         {
             Login = request.Login

@@ -1,4 +1,6 @@
-﻿namespace TaskTrain.UserHub;
+﻿using TaskTrain.Contracts;
+
+namespace TaskTrain.UserHub;
 
 internal sealed class UserHubService : IUserHubService
 {
@@ -9,7 +11,7 @@ internal sealed class UserHubService : IUserHubService
         _userRepository = userRepository;
     }
 
-    public async Task CreateUserAsync(CreateUserModel request)
+    public async Task CreateUserAsync(CreateUserRequest request)
     {
         await _userRepository.CreateAsync(request);
     }
