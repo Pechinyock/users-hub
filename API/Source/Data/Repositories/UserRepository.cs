@@ -25,13 +25,6 @@ internal sealed class UserRepository : IUserRepository
         _connectionString = "Host=localhost;Port=7777;Database=user_hub;Username=admin;Password=admin";
     }
 
-    //public async Task CreateAsync(CreateUserRequest user)
-    //{
-    //    using var connection = new NpgsqlConnection(_connectionString);
-    //    var task = await connection.QueryAsync<int>("select 1;");
-    //    var one = task.First();
-    //}
-
     public IEnumerable<User> GetAll()
     {
         throw new NotImplementedException();
@@ -71,7 +64,7 @@ internal sealed class UserRepository : IUserRepository
             {
                 return InsertionStatusEnum.ConstraintViolation;
             }
-            return InsertionStatusEnum.ConstraintViolation;
+            return InsertionStatusEnum.Failed;
         }
     }
 
@@ -93,18 +86,8 @@ internal sealed class UserRepository : IUserRepository
             {
                 return InsertionStatusEnum.ConstraintViolation;
             }
-            return InsertionStatusEnum.ConstraintViolation;
+            return InsertionStatusEnum.Failed;
         }
-    }
-
-    public InsertionStatusEnum InsertBulck(IEnumerable<User> entities)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<InsertionStatusEnum> InsertBulckAsync(IEnumerable<User> entities)
-    {
-        throw new NotImplementedException();
     }
 
     public UpdateStatusEnum Update(User entity)

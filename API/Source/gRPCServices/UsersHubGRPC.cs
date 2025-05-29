@@ -23,6 +23,7 @@ internal sealed class UsersHubGRPC : Contracts.UserHub.UserHubBase
         {
             Login = request.Login
         }).Result;
+
         return result;
     }
 }
