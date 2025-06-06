@@ -4,7 +4,7 @@ public sealed class Constants
 {
     public sealed class EnvDefaults 
     {
-        public const string ASP_DEFAULT_ENVIRONMENT_NAME = "Development";
+        public const string ASP_DEFAULT_ENVIRONMENT_NAME = "Production";
     }
 
     public sealed class Storage 
