@@ -14,8 +14,13 @@ internal static class EntryPoint
         builder.Configuration.Sources.Clear();
         builder.Configuration.LoadEnvironmentVariables();
         builder.Configuration.LoadAppsettingsJson();
+        builder.Configuration.LoadStoragesettingsJson("Postgres");
 
         builder.WebHost.ConfigureServer();
+
+        /* [ISSUE] Looks realy bad */
+        var updater = Storage.ConfigureStorageUpdater(builder.Configuration);
+        Storage.Update(updater);
 
         builder.Services.ConfigureJsonSerializer();
         builder.Services.AddGrpc();
@@ -25,7 +30,6 @@ internal static class EntryPoint
 
         app.MapGrpcService<UsersHubGRPC>();
 
-        StorageInitializer.Initialize();
 
         app.Run();
     }

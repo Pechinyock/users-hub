@@ -27,11 +27,8 @@ internal sealed class PostgresDatabaseUpdater : IStorageUpdater
         if (!connections.ContainsKey(PG_CONNECTION_KEY))
             throw new ArgumentException("Connections have to contain 'postgres' key with connection");
 
-        if(!connections.ContainsKey(Constants.Storage.STORAGE_NAME))
-            throw new ArgumentException($"Connections have to contain '{Constants.Storage.STORAGE_NAME}' key with connection");
-
         var pgConnection = connections[PG_CONNECTION_KEY];
-        var serviceConnection = connections[Constants.Storage.STORAGE_NAME];
+        var serviceConnection = connections["user_hub"];
 
         _updater = new PostgreStorageUpdater(pgConnection, serviceConnection, _migrationsPorvider);
     }

@@ -1,0 +1,12 @@
+﻿{
+  "PostgresDatabase": {
+    "DatabaseName": "postgres",
+    "Host": "localhost",
+    "Port": 7777
+  },
+  "ServiceDatabase": {
+    "DatabaseName": "user_hub",
+    "Host": "localhost",
+    "Port": 7777
+  }
+}

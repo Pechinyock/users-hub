@@ -9,29 +9,34 @@
 		<IsAotCompatible>true</IsAotCompatible>
 		<Configurations>Debug;Release;Test;Staging</Configurations>
 		<InterceptorsPreviewNamespaces>$(InterceptorsPreviewNamespaces);Dapper.AOT</InterceptorsPreviewNamespaces>
+		<StorageProvider>Postgres</StorageProvider>
 	</PropertyGroup>
 
-	<!-- Настройки, которые зависят от конфигурации -->
+	<!-- Settings that depends on $(Configuration) -->
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<AppSetting>Development</AppSetting>
 		<NoWarn>1701;1702</NoWarn>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Test|AnyCPU'">
+		<AppSetting>Test</AppSetting>
 		<NoWarn>1701;1702</NoWarn>
 		<Optemize>true</Optemize>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Staging|AnyCPU'">
+		<AppSetting>Staging</AppSetting>
 		<NoWarn>1701;1702</NoWarn>
-		<!-- Отключение генерации pdb файлов -->
+		<!-- Turn off pdb generation -->
 		<DebugSymbols>false</DebugSymbols>
 		<DebugType>none</DebugType>
 		<Optemize>true</Optemize>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<AppSetting>Production</AppSetting>
 		<NoWarn>1701;1702</NoWarn>
-		<!-- Отключение генерации pdb файлов -->
+		<!-- Turn off pdb generation -->
 		<DebugSymbols>false</DebugSymbols>
 		<DebugType>none</DebugType>
 		<Optemize>true</Optemize>
@@ -52,32 +57,26 @@
 		<PackageReference Include="TaskTrain.PostgreStorage" Version="1.0.0" />
 		<PackageReference Include="TaskTrain.UsersHub.Server" Version="1.0.0" />
 
-		<!-- Убираем копирвание appsetting файлов (включено по умолчаню шаблоном) -->
+		<!-- Turn off appsetting copy -->
 		<Content Update="Config/appsettings*.json">
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
 			<CopyToPublishDirectory>Never</CopyToPublishDirectory>
 		</Content>
 
-		<!-- При билде в Debug конфигурации копируем appsettings.Development.json -->
-		<Content Update="Config/appsettings.Development.json" Condition="'$(Configuration)' == 'Debug'">
+		<!-- Copy appsettings file depends on build configuration -->
+		<Content Update="Config/appsettings.$(AppSetting).json">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
 		</Content>
 
-		<!-- При билде в Test конфигурации копирует appsettings.StagingDocker.json -->
-		<Content Update="Config/appsettings.Test.json" Condition="'$(Configuration)' == 'Test'">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+		<!-- Turn off storagesettings copy -->
+		<Content Update="Config/storagesettings*.json">
+			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
+			<CopyToPublishDirectory>Never</CopyToPublishDirectory>
 		</Content>
 
-		<!-- При билде в Staging конфигурации копируем appsettings.Staging.json -->
-		<Content Update="Config/appsettings.Staging.json" Condition="'$(Configuration)' == 'Staging'">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-		</Content>
-
-		<!-- При билде в Release конфигурации копируем appsettings.Production.json -->
-		<Content Update="Config/appsettings.Production.json" Condition="'$(Configuration)' == 'Release'">
+		<!-- Copy storagesettings file depends on build configuration and provider -->
+		<Content Update="Config/storagesettings.$(AppSetting).$(StorageProvider).json">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
 		</Content>
@@ -86,10 +85,10 @@
 
 	<!--Copy migrations into output -->
 	<ItemGroup>
-		<None Update="PostgresMigrations\down\*.sql">
+		<None Update="$(StorageProvider)Migrations\down\*.sql">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
-		<None Update="PostgresMigrations\up\*.sql">
+		<None Update="$(StorageProvider)Migrations\up\*.sql">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
 	</ItemGroup>
